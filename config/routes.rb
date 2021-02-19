@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: %i[create show index update destroy] do
-    resources :rents, only: %i[index create]
+    resources :rents, only: %i[index create destroy]
   end
   post '/login',    to: 'sessions#create'
   post '/logout',   to: 'sessions#destroy'
