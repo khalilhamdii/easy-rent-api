@@ -12,6 +12,7 @@ class CreateCars < ActiveRecord::Migration[6.0]
       t.string :transmission
       t.string :engine
       t.string :rentDeposit
+      t.string :carImg
 
       t.timestamps
     end
