@@ -6,7 +6,7 @@ class Car < ApplicationRecord
   validates :doors, presence: true
   validates :luggages, presence: true
   validates :seats, presence: true
-  validates :emissionClass, presence: true
+  validates :emissionsClass, presence: true
   validates :transmission, presence: true
   validates :engine, presence: true
   validates :rentDeposit, presence: true

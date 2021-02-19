@@ -1,5 +1,5 @@
 class Api::V1::CarsController < ApplicationController
-  before_action :set_car, only: [:show, :update, :destroy]
+  before_action :set_car, only: %i[show update destroy]
 
   # GET /cars
   def index
@@ -34,7 +34,8 @@ class Api::V1::CarsController < ApplicationController
 
   def car_params
     # whitelist params
-    params.permit(:model, :color :bodyStyle, :pricePerDay, :doors, :luggages, :seats, :emissionClass, :transmission, :engine, :rentDeposit )
+    params.permit(:model, :color, :bodyStyle, :pricePerDay, :doors, :luggages, :seats, :emissionsClass, :transmission,
+                  :engine, :rentDeposit)
   end
 
   def set_car

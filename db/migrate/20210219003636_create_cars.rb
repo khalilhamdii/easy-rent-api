@@ -8,7 +8,7 @@ class CreateCars < ActiveRecord::Migration[6.0]
       t.string :doors
       t.string :luggages
       t.string :seats
-      t.string :emissionClass
+      t.string :emissionsClass
       t.string :transmission
       t.string :engine
       t.string :rentDeposit
