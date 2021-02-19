@@ -35,7 +35,7 @@ class Api::V1::CarsController < ApplicationController
   def car_params
     # whitelist params
     params.permit(:model, :color, :bodyStyle, :pricePerDay, :doors, :luggages, :seats, :emissionsClass, :transmission,
-                  :engine, :rentDeposit)
+                  :engine, :rentDeposit, :carImg)
   end
 
   def set_car
