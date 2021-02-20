@@ -1,10 +1,30 @@
 class RentsController < ApplicationController
   before_action :set_user
-  before_action :set_user_rent, only: [:destroy]
+  before_action :set_user_rent, only: %i[update destroy]
+
+  # GET /rents
+  def all
+    @rents = Rent.all
+    if @rents
+      json_response(@rents)
+    else
+      render json: {
+        status: 500,
+        errors: ['no rents found']
+      }
+    end
+  end
 
   # GET /users/:user_id/rents
   def index
-    json_response(@user.rents)
+    if @user.rents
+      json_response(@user.rents, :ok)
+    else
+      render json: {
+        status: 500,
+        errors: ['no rents found']
+      }
+    end
   end
 
   # POST /users/:user_id/rents
@@ -19,6 +39,12 @@ class RentsController < ApplicationController
     head :no_content
   end
 
+  # PUT /rents/:id
+  def update
+    @rent.update(rent_params)
+    head :no_content
+  end
+
   private
 
   def rent_params
@@ -27,7 +53,7 @@ class RentsController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:user_id]) if params[:user_id]
   end
 
   def set_user_rent

@@ -8,4 +8,5 @@ class Rent < ApplicationRecord
   validates :returnTime, presence: true
   validates :location, presence: true
   validates :pricePerDay, presence: true
+
 end

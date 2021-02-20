@@ -4,9 +4,12 @@ Rails.application.routes.draw do
       resources :cars
     end
   end
+  resources :rents, only: %i[update destroy]
   resources :users, only: %i[create show index update destroy] do
     resources :rents, only: %i[index create destroy]
   end
+
+  get '/rents', to: 'rents#all'
   post '/login',    to: 'sessions#create'
   post '/logout',   to: 'sessions#destroy'
   get '/logged_in', to: 'sessions#is_logged_in?'
