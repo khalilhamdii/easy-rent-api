@@ -34,15 +34,20 @@ class RentsController < ApplicationController
   end
 
   # DELETE /users/:user_id/rents/:id
+  # DELETE /rents/:id
   def destroy
     @rent.destroy
-    head :no_content
+    render json: {
+      status: 'deleted'
+    }
   end
 
   # PUT /rents/:id
   def update
     @rent.update(rent_params)
-    head :no_content
+    render json: {
+      status: 'updated'
+    }
   end
 
   private
@@ -57,6 +62,6 @@ class RentsController < ApplicationController
   end
 
   def set_user_rent
-    @rent = @user.rents.find_by!(id: params[:id]) if @user
+    @rent = @user ? @user.rents.find_by!(id: params[:id]) : Rent.find(params[:id])
   end
 end

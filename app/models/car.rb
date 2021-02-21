@@ -10,4 +10,7 @@ class Car < ApplicationRecord
   validates :transmission, presence: true
   validates :engine, presence: true
   validates :rentDeposit, presence: true
+  has_one_attached :carImg, dependent: :destroy
+  validates :carImg, attached: true, file_size: { less_than_or_equal_to: 2.megabytes },
+                     file_content_type: { allow: ['image/jpeg', 'image/png'] }
 end

@@ -4,7 +4,14 @@ class Api::V1::CarsController < ApplicationController
   # GET /cars
   def index
     @cars = Car.all
-    json_response(@cars)
+    if @cars
+      json_response(@cars)
+    else
+      render json: {
+        status: 500,
+        errors: ['no cars found']
+      }
+    end
   end
 
   # POST /cars
