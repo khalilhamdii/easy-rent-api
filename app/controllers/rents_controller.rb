@@ -53,8 +53,8 @@ class RentsController < ApplicationController
   private
 
   def rent_params
-    params.permit(:userName, :model, :status, :pickUpDate, :pickUpTime, :returnDate, :returnTime, :location,
-                  :pricePerDay)
+    params.require(:rent).permit(:userName, :model, :status, :pickUpDate, :pickUpTime, :returnDate, :returnTime, :location,
+                                 :pricePerDay)
   end
 
   def set_user

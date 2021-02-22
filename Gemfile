@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
+gem 'active_model_serializers'
 gem 'active_storage_validations', '~> 0.9.2'
 gem 'bcrypt', '~> 3.1', '>= 3.1.16'
 gem 'cloudinary', '~> 1.18', '>= 1.18.1'
