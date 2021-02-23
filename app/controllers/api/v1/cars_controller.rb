@@ -1,7 +1,7 @@
 class Api::V1::CarsController < ApplicationController
   before_action :set_car, only: %i[show update destroy]
 
-  # GET /cars
+  # GET /api/v1/cars
   def index
     @cars = Car.all
     if @cars
@@ -14,27 +14,29 @@ class Api::V1::CarsController < ApplicationController
     end
   end
 
-  # POST /cars
+  # POST /api/v1/cars
   def create
     @car = Car.create!(car_params)
     json_response(@car, :created)
   end
 
-  # GET /cars/:id
+  # GET /api/v1/cars/:id
   def show
     json_response(@car)
   end
 
-  # PUT /cars/:id
+  # PUT /api/v1/cars/:id
   def update
     @car.update(car_params)
-    head :no_content
+    json_response(@car, :accepted)
   end
 
-  # DELETE /cars/:id
+  # DELETE /api/v1/cars/:id
   def destroy
     @car.destroy
-    head :no_content
+    render json: {
+      status: 'deleted'
+    }
   end
 
   private
