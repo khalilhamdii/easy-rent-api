@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       }
     else
       render json: {
-        status: 500,
+        status: 422,
         errors: @user.errors.full_messages
       }
     end
@@ -58,7 +58,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    head :no_content
+    render json: {
+      status: 204}
   end
 
   private
