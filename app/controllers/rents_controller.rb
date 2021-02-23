@@ -1,3 +1,4 @@
+# rubocop:disable Layout/LineLength
 class RentsController < ApplicationController
   before_action :set_user
   before_action :set_user_rent, only: %i[update destroy]
@@ -65,3 +66,5 @@ class RentsController < ApplicationController
     @rent = @user ? @user.rents.find_by!(id: params[:id]) : Rent.find(params[:id])
   end
 end
+
+# rubocop:enable Layout/LineLength

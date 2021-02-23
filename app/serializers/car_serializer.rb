@@ -1,3 +1,4 @@
+# rubocop:disable Naming/MethodName
 class CarSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   attributes :id, :color, :model, :bodyStyle, :pricePerDay, :doors, :luggages, :seats, :emissionsClass, :transmission,
@@ -6,3 +7,5 @@ class CarSerializer < ActiveModel::Serializer
     url_for(object.carImg)
   end
 end
+
+# rubocop:enable Naming/MethodName

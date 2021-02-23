@@ -1,3 +1,4 @@
+# rubocop:disable Style/SafeNavigation, Naming/PredicateName
 class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: session_params[:email])
@@ -44,3 +45,5 @@ class SessionsController < ApplicationController
     params.require(:user).permit(:email, :password)
   end
 end
+
+# rubocop:enable Style/SafeNavigation, Naming/PredicateName
