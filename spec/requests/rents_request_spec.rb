@@ -36,15 +36,17 @@ RSpec.describe 'Rents', type: :request do
 
   # Test suite for POST /users/:user_id/rents
   describe 'POST /users/:user_id/rents' do
-    let(:valid_attributes) { {rent: { userName: 'John Smith',
-      model: 'Kia Rio',
-      pickUpDate: '2021-02-18',
-      returnDate: '2021-02-21',
-      pickUpTime: '08:00',
-      returnTime: '17:04',
-      location: 'Agency 2',
-      pricePerDay: '15',
-      status: 'Pending' }} }
+    let(:valid_attributes) do
+      { rent: { userName: 'John Smith',
+                model: 'Kia Rio',
+                pickUpDate: '2021-02-18',
+                returnDate: '2021-02-21',
+                pickUpTime: '08:00',
+                returnTime: '17:04',
+                location: 'Agency 2',
+                pricePerDay: '15',
+                status: 'Pending' } }
+    end
 
     context 'when request attributes are valid' do
       before { post "/users/#{user_id}/rents", params: valid_attributes }
@@ -55,15 +57,17 @@ RSpec.describe 'Rents', type: :request do
     end
 
     context 'when an invalid request' do
-      before { post "/users/#{user_id}/rents", params: {rent: { model: 'Kia Rio',
-        pickUpDate: '2021-02-18',
-        returnDate: '2021-02-21',
-        pickUpTime: '08:00',
-        returnTime: '17:04',
-        location: 'Agency 2',
-        pricePerDay: '15',
-        status: 'Pending' }} }
-      
+      before do
+        post "/users/#{user_id}/rents", params: { rent: { model: 'Kia Rio',
+                                                          pickUpDate: '2021-02-18',
+                                                          returnDate: '2021-02-21',
+                                                          pickUpTime: '08:00',
+                                                          returnTime: '17:04',
+                                                          location: 'Agency 2',
+                                                          pricePerDay: '15',
+                                                          status: 'Pending' } }
+      end
+
       it 'returns status code 422' do
         # expect(json['status']).to eq(422)
         expect(response).to have_http_status(422)
@@ -77,13 +81,13 @@ RSpec.describe 'Rents', type: :request do
 
   # Test suite for PUT /users/:user_id/rents/:id
   describe 'PUT /rents/:id' do
-    let(:valid_attributes) { {rent: { status: 'Rented' }} }
+    let(:valid_attributes) { { rent: { status: 'Rented' } } }
 
     before { put "/rents/#{id}", params: valid_attributes }
 
     context 'when rent exists' do
       it 'returns status code Updated' do
-        expect(json["status"]).to eq('updated')
+        expect(json['status']).to eq('updated')
       end
     end
 

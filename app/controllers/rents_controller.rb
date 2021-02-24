@@ -1,4 +1,3 @@
-# rubocop:disable Layout/LineLength
 class RentsController < ApplicationController
   before_action :set_user
   before_action :set_user_rent, only: %i[update destroy]
@@ -30,14 +29,14 @@ class RentsController < ApplicationController
 
   # POST /users/:user_id/rents
   def create
-   if  @user.rents.create!(rent_params)
-    json_response(@user, :created)
-   else 
-    render json: {
-      status: 422,
-      errors: @user.errors.full_messages
-    }
-   end
+    if @user.rents.create!(rent_params)
+      json_response(@user, :created)
+    else
+      render json: {
+        status: 422,
+        errors: @user.errors.full_messages
+      }
+    end
   end
 
   # DELETE /users/:user_id/rents/:id
@@ -45,7 +44,8 @@ class RentsController < ApplicationController
   def destroy
     @rent.destroy
     render json: {
-      status: 204}
+      status: 204
+    }
   end
 
   # PUT /rents/:id
@@ -71,5 +71,3 @@ class RentsController < ApplicationController
     @rent = @user ? @user.rents.find_by!(id: params[:id]) : Rent.find(params[:id])
   end
 end
-
-# rubocop:enable Layout/LineLength
