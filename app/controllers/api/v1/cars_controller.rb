@@ -16,8 +16,15 @@ class Api::V1::CarsController < ApplicationController
 
   # POST /api/v1/cars
   def create
-    @car = Car.create!(car_params)
-    json_response(@car, :created)
+    @car = Car.new(car_params)
+    if @car.save
+      json_response(@car, :created)
+    else
+      render json: {
+        status: 422,
+        errors: @car.errors.full_messages
+      }
+    end
   end
 
   # GET /api/v1/cars/:id
