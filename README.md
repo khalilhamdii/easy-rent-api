@@ -4,7 +4,7 @@
 
 ## Description
 
-> Easy Rent back-end API is a Ruby On Rails API only server. It contains four tables :
+Easy Rent back-end API is a Ruby On Rails API only server. It contains four tables :
 
 - Users table.
 - Rents table.
