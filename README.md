@@ -71,6 +71,10 @@
 <td style="text-align: right">Delete user rent</td>
 </tr>
 <tr>
+<td>POST /users</td>
+<td style="text-align: right">Create a new user </td>
+</tr>
+<tr>
 <td>GET /users/:id</td>
 <td style="text-align: right">Get user </td>
 </tr>
