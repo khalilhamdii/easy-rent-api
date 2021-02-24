@@ -1,5 +1,4 @@
 require 'rails_helper'
-include BCrypt
 RSpec.describe 'Users API', type: :request do
   # initialize test data
 

@@ -30,8 +30,14 @@ class RentsController < ApplicationController
 
   # POST /users/:user_id/rents
   def create
-    @user.rents.create!(rent_params)
+   if  @user.rents.create!(rent_params)
     json_response(@user, :created)
+   else 
+    render json: {
+      status: 422,
+      errors: @user.errors.full_messages
+    }
+   end
   end
 
   # DELETE /users/:user_id/rents/:id
@@ -39,15 +45,14 @@ class RentsController < ApplicationController
   def destroy
     @rent.destroy
     render json: {
-      status: 'deleted'
-    }
+      status: 204}
   end
 
   # PUT /rents/:id
   def update
     @rent.update(rent_params)
     render json: {
-      status: 'updated'
+      status: :updated
     }
   end
 
