@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe 'Users API', type: :request do
   # initialize test data
 
@@ -7,13 +8,17 @@ RSpec.describe 'Users API', type: :request do
   let(:user_id) { users.first.id }
 
   # Test suite for GET /users
+
   describe 'GET /users' do
     # make HTTP get request before each example
+
     before { get '/users' }
 
     it 'returns users' do
       # Note `json` is a custom helper to parse JSON responses
+
       expect(json['users']).not_to be_empty
+
       expect(json['users'].size).to eq(10)
     end
 
@@ -59,9 +64,13 @@ RSpec.describe 'Users API', type: :request do
 
     let(:valid_attributes) do
       { user: { userName: 'User',
+
                 email: 'user@user.com',
+
                 password: 'password',
+
                 password_confirmation: 'password',
+
                 role: 'USER' } }
     end
 
@@ -86,6 +95,7 @@ RSpec.describe 'Users API', type: :request do
 
       it 'returns a validation failure message' do
         expect(json['errors']).to eq(["Password can't be blank", 'Username is too short (minimum is 4 characters)',
+
                                       "Email can't be blank"])
       end
     end
