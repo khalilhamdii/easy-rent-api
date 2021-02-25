@@ -1,7 +1,9 @@
+# rubocop:disable Style/DoubleNegation
 class ApplicationController < ActionController::Base
   include ExceptionHandler
 
   # skip_before_action :verify_authenticity_token
+
   helper_method :login!, :logged_in?, :current_user, :authorized_user?, :logout!, :set_user
 
   def json_response(object, status = :ok)
@@ -32,3 +34,4 @@ class ApplicationController < ActionController::Base
     @user = User.find_by(id: session[:user_id])
   end
 end
+# rubocop:enable Style/DoubleNegation
