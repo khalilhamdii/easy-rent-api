@@ -16,12 +16,17 @@ Easy Rent back-end API is a Ruby On Rails API only server. It contains four tabl
 
 | Contents                        |
 | ------------------------------- |
+| [Api Link](#api-link)           |
 | [Api Endpoints](#api-endpoints) |
 | [Built With](#built-with-🛠)     |
 | [Setup](#setup-⏳)              |
 | [Testing](#testing-⚙️)          |
 | [Authors](#authors)             |
 | [License](#license)             |
+
+## Api Link
+
+[API Link](https://easyrent-backend.herokuapp.com/)
 
 ## Api Endpoints
 
