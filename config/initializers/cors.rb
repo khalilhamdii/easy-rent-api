@@ -26,7 +26,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   # end
 
   allow do
-    origins 'https://easyrent-rms.herokuapp.com/'
+    origins '*'
 
     resource '*',
              headers: :any,
