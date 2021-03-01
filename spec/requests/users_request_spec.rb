@@ -94,9 +94,7 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'returns a validation failure message' do
-        expect(json['errors']).to eq(["Password can't be blank", 'Username is too short (minimum is 4 characters)',
-
-                                      "Email can't be blank"])
+        expect(json['errors']).to eq(["Password can't be blank", 'Username is too short (minimum is 4 characters)', "Email can't be blank", 'Email is invalid'])
       end
     end
   end

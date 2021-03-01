@@ -1,3 +1,4 @@
+# rubocop:disable Style/MixinUsage
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 require 'database_cleaner'
@@ -6,6 +7,8 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
+include Rack::Test::Methods
+include ActionDispatch::TestProcess
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -90,3 +93,5 @@ RSpec.configure do |config|
     end
   end
 end
+
+# rubocop:enable Style/MixinUsage

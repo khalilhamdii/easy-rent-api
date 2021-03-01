@@ -1,4 +1,4 @@
-# rubocop:disable Style/SafeNavigation, Naming/PredicateName
+# rubocop:disable Style/SafeNavigation
 class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: session_params[:email])
@@ -24,4 +24,4 @@ class SessionsController < ApplicationController
   end
 end
 
-# rubocop:enable Style/SafeNavigation, Naming/PredicateName
+# rubocop:enable Style/SafeNavigation

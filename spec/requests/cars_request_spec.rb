@@ -14,7 +14,6 @@ RSpec.describe 'Cars', type: :request do
 
     it 'returns cars' do
       # Note `json` is a custom helper to parse JSON responses
-      puts json.size
       expect(json).not_to be_empty
       expect(json.size).to eq(10)
     end
@@ -24,92 +23,84 @@ RSpec.describe 'Cars', type: :request do
     end
   end
 
-  #   # Test suite for POST /api/v1/cars
+  # Test suite for POST /api/v1/cars
 
-  #   describe 'POST /api/v1/cars' do
-  #     include Rack::Test::Methods
-  #     include ActionDispatch::TestProcess
-  #     # valid payload
+  describe 'POST /api/v1/cars' do
+    # valid payload
 
-  #     let(:valid_attributes) {{ model: 'Kia Rio',
-  #       color: 'White',
-  #       bodyStyle: 'Sedan',
-  #       pricePerDay: '15',
-  #       doors: '4',
-  #       luggages: '3',
-  #       seats: '5',
-  #       engine: 'V',
-  #       emissionsClass: 'Euro 6',
-  #       transmission: 'Automatic',
-  #       rentDeposit: '300',
-  #       carImg: Rack::Test::UploadedFile.new(Rails.root.join('spec', 'factories', 'images', 'car.jpeg'), 'image/jpeg', true)
-  #  } }
+    let(:valid_attributes) do
+      { model: 'Kia Rio',
+        color: 'White',
+        bodyStyle: 'Sedan',
+        pricePerDay: '15',
+        doors: '4',
+        luggages: '3',
+        seats: '5',
+        engine: 'V',
+        emissionsClass: 'Euro 6',
+        transmission: 'Automatic',
+        rentDeposit: '300',
+        carImg: Rack::Test::UploadedFile.new(Rails.root.join('spec', 'factories', 'images', 'car.jpeg'), 'image/jpeg', true) }
+    end
 
-  #     context 'when the request is valid' do
+    context 'when the request is valid' do
+      before { post '/api/v1/cars', params: valid_attributes }
 
-  #       before { post '/api/v1/cars', params: valid_attributes }
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
 
-  #       it 'creates a car' do
-  #         expect(json['car']['model']).to eq('Kia Rio')
+      it 'creates a car' do
+        expect(json['model']).to eq('Kia Rio')
+      end
+    end
 
-  #       end
+    context 'when the request is invalid' do
+      before do
+        post '/api/v1/cars', params: { model: 'Kia Rio',
+                                       color: 'White',
+                                       bodyStyle: 'Sedan',
+                                       pricePerDay: '15',
+                                       doors: '4',
+                                       luggages: '3',
+                                       seats: '5',
+                                       engine: 'V',
+                                       emissionsClass: 'Euro 6',
+                                       transmission: 'Automatic',
+                                       rentDeposit: '300' }
+      end
 
-  #       it 'returns status code 201' do
-  #         expect(json['status']).to eq('created')
+      it 'returns status code 422' do
+        expect(json['status']).to eq(422)
+      end
 
-  #       end
+      it 'returns a validation failure message' do
+        expect(json['errors']).to eq(["Carimg can't be blank"])
+      end
+    end
+  end
 
-  #     end
+  # Test suite for PUT /api/v1/cars/:id
 
-  #     context 'when the request is invalid' do
+  describe 'PUT /api/v1/cars/:id' do
+    let(:valid_attributes) { { color: 'Black' } }
 
-  #       before { post '/api/v1/cars', params: { model: 'ki' } }
+    context 'when the record exists' do
+      before { put "/api/v1/cars/#{car_id}", params: valid_attributes }
 
-  #       it 'returns status code 422' do
-  #         expect(json['status']).to eq(422)
+      it 'returns updated color' do
+        expect(json['color']).to eq('Black')
+      end
+    end
+  end
 
-  #       end
+  # Test suite for DELETE /api/v1/cars/:id
 
-  #       it 'returns a validation failure message' do
-  #         expect(json['errors']).to eq(["Password can't be blank","Username is too short (minimum is 4 characters)","Email can't be blank"])
+  describe 'DELETE /api/v1/cars/:id' do
+    before { delete "/api/v1/cars/#{car_id}" }
 
-  #       end
-
-  #     end
-
-  #   end
-
-  # # Test suite for PUT /api/v1/cars/:id
-
-  # describe 'PUT /api/v1/cars/:id' do
-
-  #   let(:valid_attributes) { {user: { role: 'ADMIN' }} }
-
-  #   context 'when the record exists' do
-
-  #     before { put "/api/v1/cars/#{user_id}", params: valid_attributes }
-
-  #     it 'returns status code updated' do
-
-  #       expect(json["status"]).to eq('updated')
-
-  #     end
-
-  #   end
-
-  # end
-
-  # # Test suite for DELETE /api/v1/cars/:id
-
-  # describe 'DELETE /api/v1/cars/:id' do
-
-  #   before { delete "/api/v1/cars/#{user_id}" }
-
-  #   it 'returns status code 204' do
-
-  #     expect(json['status']).to eq(204)
-
-  #   end
-
-  # end
+    it 'returns status code deleted' do
+      expect(json['status']).to eq('deleted')
+    end
+  end
 end
