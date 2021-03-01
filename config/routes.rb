@@ -11,6 +11,4 @@ Rails.application.routes.draw do
 
   get '/rents', to: 'rents#all'
   post '/login',    to: 'sessions#create'
-  post '/logout',   to: 'sessions#destroy'
-  get '/logged_in', to: 'sessions#is_logged_in?'
 end
